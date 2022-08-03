@@ -1,34 +1,40 @@
 import { connect } from "react-redux";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import QuestionCard from "./QuestionCard";
 
 const Dashboard = (props) => {
   const [showUnanswered, setShowUnanswered] = useState(true);
+  const refUnanswered = useRef();
+  const refAnswered = useRef();
+
+  useEffect(() => {
+    setShowUnanswered(true);
+  }, []);
+
   const handleClick = (e) => {
-    e.preventDefault();
+    setShowUnanswered(
+      (current) => e.target.text === refUnanswered.current.text
+    );
 
-    e.target.id === "unanswered-btn"
-      ? setShowUnanswered(true)
-      : setShowUnanswered(false);
-
-    if (showUnanswered === true) {
-      //TODO:change button class
-    }
+    console.log(showUnanswered);
   };
 
   return (
-    <div>
-      <div id="unanswered-btn" className="question-tab" onClick={handleClick}>
-        Unanswered
-      </div>
-      <div
-        id="answered-btn"
-        className="question-tab-disabled"
-        onClick={handleClick}
-      >
-        Answered
-      </div>
-      <ul>
+    <div className="container">
+      <ul className="tab">
+        <li className={showUnanswered ? "tab-item active" : "tab-item"}>
+          <Link to="#" onClick={handleClick} ref={refUnanswered}>
+            Unanswered
+          </Link>
+        </li>
+        <li className={!showUnanswered ? "tab-item active" : "tab-item"}>
+          <Link to="#" onClick={handleClick} ref={refAnswered}>
+            Answered
+          </Link>
+        </li>
+      </ul>
+      <div className="columns">
         {Object.values(props.questions)
           .filter((question) =>
             showUnanswered === true
@@ -39,11 +45,9 @@ const Dashboard = (props) => {
           )
           .sort((a, b) => b.timestamp - a.timestamp)
           .map((question) => (
-            <li key={question.id}>
-              <QuestionCard questionId={question.id} />
-            </li>
+            <QuestionCard questionId={question.id} key={question.id} />
           ))}
-      </ul>
+      </div>
     </div>
   );
 };
