@@ -12,7 +12,7 @@ const Dashboard = (props) => {
       : setShowUnanswered(false);
 
     if (showUnanswered === true) {
-      //change button class
+      //TODO:change button class
     }
   };
 
@@ -52,7 +52,7 @@ const mapStateToProps = ({ questions, loggedUser }) => ({
   loggedUser,
   questions,
   questionIds: Object.keys(questions).sort(
-    (a, b) => questions[b].timestamp - [a].timestamp
+    (a, b) => questions[b].timestamp - questions[a].timestamp
   ),
 });
 

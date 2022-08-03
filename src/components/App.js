@@ -5,6 +5,7 @@ import "../App.css";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 import LoggedUser from "./LoggedUser";
+import UserList from "./UserList";
 
 function App(props) {
   useEffect(() => {
@@ -18,7 +19,7 @@ function App(props) {
           <Login />
         </h3>
       ) : (
-        <LoggedUser />
+        <UserList />
       )}
     </div>
   );
