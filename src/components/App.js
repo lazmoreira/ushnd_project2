@@ -7,8 +7,9 @@ import UserList from "./UserList";
 import NewQuestion from "./NewQuestion";
 import Question from "./Question";
 import Nav from "./Nav";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Switch } from "react-router-dom";
 import LoadingBar from "react-redux-loading-bar";
+import ErrorPage from "./ErrorPage";
 
 function App(props) {
   useEffect(() => {
@@ -28,6 +29,7 @@ function App(props) {
             <Route path="/questions/:question_id" element={<Question />} />
             <Route path="/add" element={<NewQuestion />} />
             <Route path="/leaderboard" element={<UserList />} />
+            <Route exact element={<ErrorPage />} />
           </Routes>
         )}
       </div>

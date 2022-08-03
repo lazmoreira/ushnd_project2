@@ -4,9 +4,9 @@ const User = (props) => {
   const { user, loggedUser } = props;
 
   return (
-    <div class="tile bg-secondary mt-2 p-2">
-      <div class="tile-icon">
-        <div class="example-tile-icon">
+    <div className="tile bg-secondary mt-2 p-2">
+      <div className="tile-icon">
+        <div className="example-tile-icon">
           <img
             src={user.avatarURL}
             alt={`Avatar of ${user.name}`}
@@ -14,10 +14,10 @@ const User = (props) => {
           />
         </div>
       </div>
-      <div class="tile-content">
-        <p class="tile-title text-bold">{user.name}</p>
+      <div className="tile-content">
+        <p className="tile-title text-bold">{user.name}</p>
       </div>
-      <div class="tile-action">
+      <div className="tile-action">
         <span className="chip bg-primary">{`${user.questions.length} Questions`}</span>
         <span className="chip bg-primary">{`${
           Object.keys(user.answers).length

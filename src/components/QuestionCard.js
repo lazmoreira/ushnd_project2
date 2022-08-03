@@ -14,7 +14,7 @@ const QuestionCard = (props) => {
           </div>
           <div className="card-body">
             <div className="text-primary">{question.optionOne.text}</div>
-            <div class="divider text-center" data-content="OR"></div>
+            <div className="divider text-center" data-content="OR"></div>
             <div className="text-primary">{question.optionTwo.text}</div>
           </div>
         </div>

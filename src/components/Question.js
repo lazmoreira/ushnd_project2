@@ -11,6 +11,8 @@ const Question = (props) => {
   const percentOpt1 = (votesOpt1 / totalVotes) * 100;
   const percentOpt2 = (votesOpt2 / totalVotes) * 100;
 
+  console.log(question);
+
   const handleOptionSelected = (e) => {
     e.preventDefault();
 
@@ -32,8 +34,8 @@ const Question = (props) => {
             />
             <h3>Would You Rather</h3>
           </div>
-          <div class="columns">
-            <div class="column">
+          <div className="columns">
+            <div className="column">
               <button
                 className={
                   answered === true && user.answers[question.id] === "optionOne"
@@ -55,8 +57,8 @@ const Question = (props) => {
                 </div>
               ) : null}
             </div>
-            <div class="divider-vert" data-content="OR"></div>
-            <div class="column">
+            <div className="divider-vert" data-content="OR"></div>
+            <div className="column">
               <button
                 className={
                   answered === true && user.answers[question.id] === "optionTwo"
