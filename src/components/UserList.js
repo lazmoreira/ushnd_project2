@@ -6,12 +6,13 @@ const UserList = (props) => {
   const { users } = props;
 
   return (
-    <div>
-      <ul>
+    <div className="columns">
+      <div className="col-2 col-mx-auto">
+        <h2 className="text-primary">Leaderboard</h2>
         {users.map((user) => (
           <User key={user.id} id={user.id} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

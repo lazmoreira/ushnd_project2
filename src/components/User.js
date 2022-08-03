@@ -4,21 +4,25 @@ const User = (props) => {
   const { user, loggedUser } = props;
 
   return (
-    <div
-      className={
-        loggedUser === user.id ? "logged-user-leaderboard" : "user-leaderboard"
-      }
-    >
-      <img
-        src={user.avatarURL}
-        alt={`Avatar of ${user.name}`}
-        className="avatar"
-      />
-      <h2>{user.name}</h2>
-      <span className="question-counter">{`${user.questions.length} Questions`}</span>
-      <span className="question-counter">{`${
-        Object.keys(user.answers).length
-      } Answers`}</span>
+    <div class="tile bg-secondary mt-2 p-2">
+      <div class="tile-icon">
+        <div class="example-tile-icon">
+          <img
+            src={user.avatarURL}
+            alt={`Avatar of ${user.name}`}
+            className="avatar"
+          />
+        </div>
+      </div>
+      <div class="tile-content">
+        <p class="tile-title text-bold">{user.name}</p>
+      </div>
+      <div class="tile-action">
+        <span className="chip bg-primary">{`${user.questions.length} Questions`}</span>
+        <span className="chip bg-primary">{`${
+          Object.keys(user.answers).length
+        } Answers`}</span>
+      </div>
     </div>
   );
 };

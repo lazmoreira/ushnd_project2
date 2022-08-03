@@ -23,38 +23,48 @@ const NewQuestion = (props) => {
   };
 
   return (
-    <div>
-      <h3>Create a new question</h3>
-      <h1>Would You Rather</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type={"text"}
-          placeholder={"Type the first option"}
-          value={optionOne}
-          className="option-input"
-          maxLength={120}
-          id="optionOne"
-          onChange={handleChange}
-        />
-        <label htmlFor="optionOne">First option</label>
-        <input
-          type={"text"}
-          placeholder={"Type the second option"}
-          value={optionTwo}
-          className="option-input"
-          maxLength={120}
-          id="optionTwo"
-          onChange={handleChange}
-        />
-        <label htmlFor="optionTwo">Second option</label>
-        <button
-          className="btn"
-          type="submit"
-          disabled={optionOne === "" || optionTwo === ""}
-        >
-          Submit
-        </button>
-      </form>
+    <div className="container">
+      <div className="columns">
+        <div className="column col-6 col-mx-auto">
+          <div className="text-primary">
+            <h3>Create a new question</h3>
+            <h1>Would You Rather</h1>
+          </div>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="optionOne" className="form-label">
+              First option
+            </label>
+            <input
+              type={"text"}
+              placeholder={"Type the first option"}
+              value={optionOne}
+              className="form-input input-lg"
+              maxLength={120}
+              id="optionOne"
+              onChange={handleChange}
+            />
+            <label htmlFor="optionTwo" className="form-label">
+              Second option
+            </label>
+            <input
+              type={"text"}
+              placeholder={"Type the second option"}
+              value={optionTwo}
+              className="form-input input-lg"
+              maxLength={120}
+              id="optionTwo"
+              onChange={handleChange}
+            />
+            <button
+              className="btn btn-primary btn-block mt-2"
+              type="submit"
+              disabled={optionOne === "" || optionTwo === ""}
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

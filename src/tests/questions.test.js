@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import App from "../components/App";
+import NewQuestion from "../components/NewQuestion";
 import React from "react";
 import { legacy_createStore as createStore } from "redux";
 import { Provider } from "react-redux";
@@ -13,7 +13,7 @@ describe("NewQuestion", () => {
   it("will match snapshot", () => {
     const comp = render(
       <Provider store={store}>
-        <ErrorPage />
+        <NewQuestion />
       </Provider>
     );
     expect(comp).toMatchSnapshot();
