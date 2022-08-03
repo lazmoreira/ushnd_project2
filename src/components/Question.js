@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { handleAnswerQuestion } from "../actions/questions";
+import withRouter from "../helpers/helper";
 
 const Question = (props) => {
   const { question, author, user, dispatch } = props;
@@ -19,50 +20,75 @@ const Question = (props) => {
   };
 
   return (
-    <div className="question">
-      <img
-        src={author.avatarURL}
-        alt={`Avatar of ${author.name}`}
-        className="avatar"
-      />
-      <div className="question-author">Author: {author.name}</div>
-      {answered === true && user.answers[question.id] === "optionOne" ? (
-        <span className="your-vote">You voted</span>
-      ) : null}
-      <div
-        className="question-option"
-        id="optionOne"
-        onClick={handleOptionSelected}
-      >
-        {question.optionOne.text}
+    <div className="container">
+      <div className="columns">
+        <div className="p-centered">
+          <div>
+            <h5>Author: {author.name}</h5>
+            <img
+              src={author.avatarURL}
+              alt={`Avatar of ${author.name}`}
+              className="p-centered"
+            />
+            <h3>Would You Rather</h3>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <button
+                className={
+                  answered === true && user.answers[question.id] === "optionOne"
+                    ? "btn btn-lg btn-primary"
+                    : "btn btn-lg"
+                }
+                id="optionOne"
+                onClick={handleOptionSelected}
+              >
+                {question.optionOne.text}
+              </button>
+              {answered === true &&
+              user.answers[question.id] === "optionOne" ? (
+                <div className="text-primary">Your vote</div>
+              ) : null}
+              {answered === true ? (
+                <div className="text-primary">
+                  {`${votesOpt1} votes - ${percentOpt1}%`}
+                </div>
+              ) : null}
+            </div>
+            <div class="divider-vert" data-content="OR"></div>
+            <div class="column">
+              <button
+                className={
+                  answered === true && user.answers[question.id] === "optionTwo"
+                    ? "btn btn-lg btn-primary"
+                    : "btn btn-lg"
+                }
+                id="optionTwo"
+                onClick={handleOptionSelected}
+              >
+                {question.optionTwo.text}
+              </button>
+              {answered === true &&
+              user.answers[question.id] === "optionTwo" ? (
+                <div className="text-primary">Your vote</div>
+              ) : null}
+              {answered === true ? (
+                <p className="text-primary">
+                  {`${votesOpt2} votes - ${percentOpt2}%`}
+                </p>
+              ) : null}
+            </div>
+          </div>
+        </div>
       </div>
-      {answered === true ? (
-        <span className="vote-counter">
-          {`${votesOpt1} votes - ${percentOpt1}%`}
-        </span>
-      ) : null}
-      <div className="center">or</div>
-      {answered === true && user.answers[question.id] === "optionTwo" ? (
-        <span className="your-vote">you voted</span>
-      ) : null}
-      <div
-        className="question-option"
-        id="optionTwo"
-        onClick={handleOptionSelected}
-      >
-        {question.optionTwo.text}
-      </div>
-      {answered === true ? (
-        <span className="vote-counter">
-          {`${votesOpt2} votes - ${percentOpt2}%`}
-        </span>
-      ) : null}
     </div>
   );
 };
 
-const mapStateToProps = ({ loggedUser, questions, users }, { questionId }) => {
-  const question = questions[questionId];
+const mapStateToProps = ({ loggedUser, questions, users }, props) => {
+  console.log("PROPS", props);
+  const { question_id } = props.router.params;
+  const question = questions[question_id];
   const author = users[question.author];
   const user = users[loggedUser];
 
@@ -73,4 +99,4 @@ const mapStateToProps = ({ loggedUser, questions, users }, { questionId }) => {
   };
 };
 
-export default connect(mapStateToProps)(Question);
+export default withRouter(connect(mapStateToProps)(Question));

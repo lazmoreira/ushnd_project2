@@ -17,10 +17,14 @@ const LoggedUser = (props) => {
 
   return (
     <div>
-      <div>{`Logged as: ${loggedUser}`}</div>
-      <span className="logout-btn" onClick={handleClick}>
-        Logout
-      </span>
+      {loggedUser !== null ? (
+        <div>
+          <div className="text-primary">{loggedUser}</div>
+          <button className="btn" onClick={handleClick}>
+            Logout
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 };

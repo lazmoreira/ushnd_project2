@@ -22,21 +22,36 @@ const Login = (props) => {
   };
 
   return (
-    <div>
-      <h3>Choose a user to login</h3>
-      <form onSubmit={handleSubmit}>
-        <select name="users" onChange={handleChange}>
-          <option value=""></option>
-          {props.users.map((user) => (
-            <option key={user.id} value={user.id}>
-              {user.name}
-            </option>
-          ))}
-        </select>
-        <button className="btn" type="submit" disabled={userId === ""}>
-          Login
-        </button>
-      </form>
+    <div className="container">
+      <div className="columns">
+        <div className="col-4 col-mx-auto">
+          <h3>Choose a user to login</h3>
+
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+              <select
+                name="users"
+                onChange={handleChange}
+                className="form-select select-lg form-input"
+              >
+                <option value=""></option>
+                {props.users.map((user) => (
+                  <option key={user.id} value={user.id}>
+                    {user.name}
+                  </option>
+                ))}
+              </select>
+              <button
+                className="btn btn-primary btn-lg form-input"
+                type="submit"
+                disabled={userId === ""}
+              >
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

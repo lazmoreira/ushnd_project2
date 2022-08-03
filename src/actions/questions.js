@@ -1,9 +1,10 @@
-import { _saveQuestionAnswer } from "../api/_DATA";
+import { _saveQuestionAnswer, _saveQuestion } from "../api/_DATA";
 import { addAnswerUser, removeAnswerUser } from "./users";
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
 export const ANSWER_QUESTION = "ANSWER_QUESTION";
 export const REMOVE_ANSWER = "REMOVE_ANSWER";
+export const ADD_QUESTION = "ADD_QUESTION";
 
 export function receiveQuestions(questions) {
   return {
@@ -27,6 +28,23 @@ function removeAnswer(questionId, option, loggedUser) {
     questionId,
     option,
     loggedUser,
+  };
+}
+
+function addQuestion(question) {
+  return {
+    type: ADD_QUESTION,
+    question,
+  };
+}
+
+export function handleAddQuestion(optionOneText, optionTwoText, author) {
+  return (dispatch) => {
+    const question = { optionOneText, optionTwoText, author };
+
+    return _saveQuestion(question).then((newQuestion) =>
+      dispatch(addQuestion(newQuestion))
+    );
   };
 }
 

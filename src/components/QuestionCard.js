@@ -1,21 +1,24 @@
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const QuestionCard = (props) => {
-  const navigate = useNavigate();
-  const question = props.question;
+  const { question, author } = props;
 
-  const handleClick = (e) => {
-    e.preventDefault();
-
-    navigate(`/question/${question.id}`);
-  };
   return (
-    <div className="question-card" onClick={handleClick}>
-      <div className="question-author">Author: {props.author}</div>
-      <div className="question-card-option">{question.optionOne.text}</div>
-      <div className="center">or</div>
-      <div className="question-card-option">{question.optionTwo.text}</div>
+    <div className="column col-3 mt-2">
+      <Link to={`/questions/${question.id}`}>
+        <div className="card">
+          <div className="card-header">
+            <div className="card-subtitle text-gray">{`Author: ${author}`}</div>
+            <div className="card-title h3">Would You Rather</div>
+          </div>
+          <div className="card-body">
+            <div className="text-gray">{question.optionOne.text}</div>
+            <div class="divider text-center" data-content="OR"></div>
+            <div className="text-gray">{question.optionTwo.text}</div>
+          </div>
+        </div>
+      </Link>
     </div>
   );
 };

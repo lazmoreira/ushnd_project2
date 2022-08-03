@@ -2,6 +2,7 @@ import {
   RECEIVE_QUESTIONS,
   ANSWER_QUESTION,
   REMOVE_ANSWER,
+  ADD_QUESTION,
 } from "../actions/questions";
 
 export default function questions(state = {}, action) {
@@ -36,6 +37,14 @@ export default function questions(state = {}, action) {
             ),
           },
         },
+      };
+
+    case ADD_QUESTION:
+      const { question } = action;
+
+      return {
+        ...state,
+        [question.id]: question,
       };
 
     default:

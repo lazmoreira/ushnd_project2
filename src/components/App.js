@@ -1,11 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
-import "../App.css";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
-import LoggedUser from "./LoggedUser";
 import UserList from "./UserList";
+import NewQuestion from "./NewQuestion";
+import Question from "./Question";
+import Nav from "./Nav";
+import { Routes, Route } from "react-router-dom";
+import LoadingBar from "react-redux-loading-bar";
 
 function App(props) {
   useEffect(() => {
@@ -13,15 +16,22 @@ function App(props) {
   }, []);
 
   return (
-    <div className="App">
-      {props.notLogged === true ? (
-        <h3>
+    <Fragment>
+      <div className="container">
+        <LoadingBar />
+        <Nav />
+        {props.notLogged === true ? (
           <Login />
-        </h3>
-      ) : (
-        <UserList />
-      )}
-    </div>
+        ) : (
+          <Routes>
+            <Route path="/" exact element={<Dashboard />} />
+            <Route path="/questions/:question_id" element={<Question />} />
+            <Route path="/add" element={<NewQuestion />} />
+            <Route path="/leaderboard" element={<UserList />} />
+          </Routes>
+        )}
+      </div>
+    </Fragment>
   );
 }
 
