@@ -2,10 +2,12 @@ import { connect } from "react-redux";
 import { handleAnswerQuestion } from "../actions/questions";
 import { Navigate } from "react-router-dom";
 import withRouter from "../helpers/helper";
+import ErrorPage from "./ErrorPage";
 
 const Question = (props) => {
+  console.log("PROPS", props);
   if (props.notExists) {
-    return <Navigate to="/notfound" />;
+    return <ErrorPage />;
   }
 
   const { question, author, user, dispatch } = props;

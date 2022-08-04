@@ -41,16 +41,8 @@ function App(props) {
               path="/leaderboard"
               element={props.notLogged ? <Login /> : <UserList />}
             />
-            <Route
-              path="/notfound"
-              exact
-              element={props.notLogged ? <Login /> : <ErrorPage />}
-            />
-            <Route
-              path="*"
-              exact
-              element={props.notLogged ? <Login /> : <ErrorPage />}
-            />
+            <Route path="/notfound" exact element={<ErrorPage />} />
+            <Route path="*" exact element={<ErrorPage />} />
           </Routes>
         </div>
       </div>

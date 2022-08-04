@@ -20,7 +20,6 @@ const Login = (props) => {
 
     props.dispatch(setLoggedUser(userId));
 
-    localStorage.setItem("loggedUser", userId);
     navigate(location.pathname, { replace: true });
   };
 
@@ -51,14 +50,6 @@ const Login = (props) => {
           >
             Login
           </button>
-          {localStorage.getItem("loggedUser") === userId && (
-            <div
-              className="column col-4 col-mx-auto mt-2"
-              style={{ textAlign: "center" }}
-            >
-              Login successful
-            </div>
-          )}
         </div>
       </form>
     </div>

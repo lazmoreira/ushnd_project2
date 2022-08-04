@@ -9,12 +9,6 @@ export function handleInitialData(loggedUser) {
     dispatch(showLoading());
     return Promise.all([_getUsers(), _getQuestions()]).then(
       ([users, questions]) => {
-        const loggedUser = localStorage.getItem("loggedUser");
-
-        if (loggedUser) {
-          dispatch(setLoggedUser(loggedUser));
-        }
-
         dispatch(receiveUsers(users));
         dispatch(receiveQuestions(questions));
         dispatch(hideLoading());

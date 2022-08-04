@@ -1,5 +1,4 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen, fireEvent } from "@testing-library/react";
 import Login from "../components/Login";
 import React from "react";
 import { legacy_createStore as createStore } from "redux";
@@ -39,10 +38,8 @@ describe("Login", () => {
     const userSelect = screen.getByTestId("user");
     const submit = screen.getByText("Login");
 
-    const user = userEvent.setup();
-
-    user.selectOptions(userSelect, "sarahedo");
-    user.click(submit);
+    fireEvent.select(userSelect, "sarahedo");
+    fireEvent.click(submit);
 
     expect(userSelect.textContent).toEqual("Sarah Edo");
   });
