@@ -1,3 +1,8 @@
+## Employee Polls Project
+
+Allow the employee to login, create new question and answer questions.
+A leaderboard will be present as well.
+
 ## Routes
 
 - /
