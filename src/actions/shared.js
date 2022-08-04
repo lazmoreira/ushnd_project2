@@ -1,7 +1,6 @@
 import { _getUsers, _getQuestions } from "../api/_DATA";
 import { receiveQuestions } from "../actions/questions";
 import { receiveUsers } from "../actions/users";
-import { setLoggedUser } from "./loggedUser";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 
 export function handleInitialData(loggedUser) {

@@ -7,7 +7,7 @@ import UserList from "./UserList";
 import NewQuestion from "./NewQuestion";
 import Question from "./Question";
 import Nav from "./Nav";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import LoadingBar from "react-redux-loading-bar";
 import ErrorPage from "./ErrorPage";
 import React from "react";
@@ -15,7 +15,7 @@ import React from "react";
 function App(props) {
   useEffect(() => {
     props.dispatch(handleInitialData(props.loggedUser));
-  }, []);
+  });
 
   return (
     <Fragment>

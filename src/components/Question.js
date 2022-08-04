@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { handleAnswerQuestion } from "../actions/questions";
-import { Navigate } from "react-router-dom";
 import withRouter from "../helpers/helper";
 import ErrorPage from "./ErrorPage";
 
