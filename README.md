@@ -2,6 +2,7 @@
 
 - /
 - /login
+- /add
 - /questions/:question_id
 - /leaderboard
 - /notfound
