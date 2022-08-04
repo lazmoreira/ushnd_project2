@@ -12,8 +12,11 @@
 **Install**  
 npm install
 
+**Start**  
+npm start
+
 **Build**  
 npm run build
 
 **Test**  
-npm run test
+npm test

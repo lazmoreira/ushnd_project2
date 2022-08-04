@@ -1,21 +1,36 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import NewQuestion from "../components/NewQuestion";
 import React from "react";
 import { legacy_createStore as createStore } from "redux";
 import { Provider } from "react-redux";
+import { MemoryRouter } from "react-router-dom";
 import reducer from "../reducers";
 import middleware from "../middleware";
-import ErrorPage from "../components/ErrorPage";
 
 const store = createStore(reducer, middleware);
 
 describe("NewQuestion", () => {
   it("will match snapshot", () => {
-    const comp = render(
-      <Provider store={store}>
-        <NewQuestion />
-      </Provider>
+    const { component } = render(
+      <MemoryRouter>
+        <Provider store={store}>
+          <NewQuestion />
+        </Provider>
+      </MemoryRouter>
     );
-    expect(comp).toMatchSnapshot();
+    expect(component).toMatchSnapshot();
+  });
+
+  it("will verify if the fields are on the screen", () => {
+    render(
+      <MemoryRouter>
+        <Provider store={store}>
+          <NewQuestion />
+        </Provider>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByTestId("optionOne")).toBeInTheDocument();
+    expect(screen.getByTestId("optionTwo")).toBeInTheDocument();
   });
 });

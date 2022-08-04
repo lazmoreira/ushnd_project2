@@ -16,8 +16,6 @@ const Dashboard = (props) => {
     setShowUnanswered(
       (current) => e.target.text === refUnanswered.current.text
     );
-
-    console.log(showUnanswered);
   };
 
   return (

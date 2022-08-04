@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import User from "./User";
 
 const UserList = (props) => {
-  console.log("PROPS", props);
   const { users } = props;
 
   return (

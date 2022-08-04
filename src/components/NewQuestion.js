@@ -41,6 +41,7 @@ const NewQuestion = (props) => {
               className="form-input input-lg"
               maxLength={120}
               id="optionOne"
+              data-testid="optionOne"
               onChange={handleChange}
             />
             <label htmlFor="optionTwo" className="form-label">
@@ -53,6 +54,7 @@ const NewQuestion = (props) => {
               className="form-input input-lg"
               maxLength={120}
               id="optionTwo"
+              data-testid="optionTwo"
               onChange={handleChange}
             />
             <button

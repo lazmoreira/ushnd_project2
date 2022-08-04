@@ -14,7 +14,6 @@ import React from "react";
 
 function App(props) {
   useEffect(() => {
-    console.log("BEFORE USEEFFECT", props.loggedUser);
     props.dispatch(handleInitialData(props.loggedUser));
   }, []);
 
@@ -25,40 +24,33 @@ function App(props) {
         <Nav />
         <div className="columns">
           <Routes>
-            <Route path="/login" element={<Login />} />
             <Route
               path="/"
               exact
-              element={
-                props.notLogged ? <Navigate to="/login" /> : <Dashboard />
-              }
+              element={props.notLogged ? <Login /> : <Dashboard />}
             />
             <Route
               path="/questions/:question_id"
-              element={
-                props.notLogged ? <Navigate to="/login" /> : <Question />
-              }
+              element={props.notLogged ? <Login /> : <Question />}
             />
             <Route
               path="/add"
-              element={
-                props.notLogged ? <Navigate to="/login" /> : <NewQuestion />
-              }
+              element={props.notLogged ? <Login /> : <NewQuestion />}
             />
             <Route
               path="/leaderboard"
-              element={
-                props.notLogged ? <Navigate to="/login" /> : <UserList />
-              }
+              element={props.notLogged ? <Login /> : <UserList />}
             />
             <Route
               path="/notfound"
               exact
-              element={
-                props.notLogged ? <Navigate to="/login" /> : <ErrorPage />
-              }
+              element={props.notLogged ? <Login /> : <ErrorPage />}
             />
-            <Route path="*" exact element={<ErrorPage />} />
+            <Route
+              path="*"
+              exact
+              element={props.notLogged ? <Login /> : <ErrorPage />}
+            />
           </Routes>
         </div>
       </div>

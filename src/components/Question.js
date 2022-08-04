@@ -4,7 +4,6 @@ import { Navigate } from "react-router-dom";
 import withRouter from "../helpers/helper";
 
 const Question = (props) => {
-  console.log("001", props);
   if (props.notExists) {
     return <Navigate to="/notfound" />;
   }
@@ -16,8 +15,6 @@ const Question = (props) => {
   const totalVotes = votesOpt1 + votesOpt2;
   const percentOpt1 = (votesOpt1 / totalVotes) * 100;
   const percentOpt2 = (votesOpt2 / totalVotes) * 100;
-
-  console.log(question);
 
   const handleOptionSelected = (e) => {
     e.preventDefault();
@@ -96,12 +93,8 @@ const Question = (props) => {
 };
 
 const mapStateToProps = ({ loggedUser, questions, users }, props) => {
-  console.log("PROPS", loggedUser);
   const { question_id } = props.router.params;
   const question = questions[question_id];
-
-  console.log("PROPS", question_id);
-  console.log("PROPS", question);
 
   if (!question) {
     return {
