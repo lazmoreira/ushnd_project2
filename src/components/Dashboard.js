@@ -21,15 +21,25 @@ const Dashboard = (props) => {
   };
 
   return (
-    <div className="container">
+    <div className="column col-12">
       <ul className="tab">
         <li className={showUnanswered ? "tab-item active" : "tab-item"}>
-          <Link to="#" onClick={handleClick} ref={refUnanswered}>
+          <Link
+            to="#"
+            onClick={handleClick}
+            ref={refUnanswered}
+            className="text-primary"
+          >
             Unanswered
           </Link>
         </li>
         <li className={!showUnanswered ? "tab-item active" : "tab-item"}>
-          <Link to="#" onClick={handleClick} ref={refAnswered}>
+          <Link
+            to="#"
+            onClick={handleClick}
+            ref={refAnswered}
+            className="text-primary"
+          >
             Answered
           </Link>
         </li>

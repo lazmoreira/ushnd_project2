@@ -17,41 +17,37 @@ const Login = (props) => {
     e.preventDefault();
 
     props.dispatch(setLoggedUser(userId));
-
-    navigate("/");
+    localStorage.setItem("loggedUser", userId);
+    navigate("/", { replace: true });
   };
 
   return (
-    <div className="container">
-      <div className="columns">
-        <div className="col-4 col-mx-auto">
-          <h3>Choose a user to login</h3>
+    <div className="col-4 col-mx-auto">
+      <h3 className="col-6 col-mx-auto text-primary">Choose a user to login</h3>
 
-          <form onSubmit={handleSubmit}>
-            <div className="input-group">
-              <select
-                name="users"
-                onChange={handleChange}
-                className="form-select select-lg form-input"
-              >
-                <option value=""></option>
-                {props.users.map((user) => (
-                  <option key={user.id} value={user.id}>
-                    {user.name}
-                  </option>
-                ))}
-              </select>
-              <button
-                className="btn btn-primary btn-lg form-input"
-                type="submit"
-                disabled={userId === ""}
-              >
-                Login
-              </button>
-            </div>
-          </form>
+      <form onSubmit={handleSubmit}>
+        <div className="input-group">
+          <select
+            name="users"
+            onChange={handleChange}
+            className="form-select select-lg form-input"
+          >
+            <option value=""></option>
+            {props.users.map((user) => (
+              <option key={user.id} value={user.id}>
+                {user.name}
+              </option>
+            ))}
+          </select>
+          <button
+            className="btn btn-primary btn-lg form-input"
+            type="submit"
+            disabled={userId === ""}
+          >
+            Login
+          </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

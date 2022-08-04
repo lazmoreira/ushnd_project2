@@ -7,13 +7,15 @@ import UserList from "./UserList";
 import NewQuestion from "./NewQuestion";
 import Question from "./Question";
 import Nav from "./Nav";
-import { Routes, Route, Switch } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import LoadingBar from "react-redux-loading-bar";
 import ErrorPage from "./ErrorPage";
+import React from "react";
 
 function App(props) {
   useEffect(() => {
-    props.dispatch(handleInitialData());
+    console.log("BEFORE USEEFFECT", props.loggedUser);
+    props.dispatch(handleInitialData(props.loggedUser));
   }, []);
 
   return (
@@ -21,17 +23,44 @@ function App(props) {
       <div className="container">
         <LoadingBar />
         <Nav />
-        {props.notLogged === true ? (
-          <Login />
-        ) : (
+        <div className="columns">
           <Routes>
-            <Route path="/" exact element={<Dashboard />} />
-            <Route path="/questions/:question_id" element={<Question />} />
-            <Route path="/add" element={<NewQuestion />} />
-            <Route path="/leaderboard" element={<UserList />} />
-            <Route exact element={<ErrorPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/"
+              exact
+              element={
+                props.notLogged ? <Navigate to="/login" /> : <Dashboard />
+              }
+            />
+            <Route
+              path="/questions/:question_id"
+              element={
+                props.notLogged ? <Navigate to="/login" /> : <Question />
+              }
+            />
+            <Route
+              path="/add"
+              element={
+                props.notLogged ? <Navigate to="/login" /> : <NewQuestion />
+              }
+            />
+            <Route
+              path="/leaderboard"
+              element={
+                props.notLogged ? <Navigate to="/login" /> : <UserList />
+              }
+            />
+            <Route
+              path="/notfound"
+              exact
+              element={
+                props.notLogged ? <Navigate to="/login" /> : <ErrorPage />
+              }
+            />
+            <Route path="*" exact element={<ErrorPage />} />
           </Routes>
-        )}
+        </div>
       </div>
     </Fragment>
   );
@@ -39,6 +68,7 @@ function App(props) {
 
 const mapStateToProps = ({ loggedUser }) => ({
   notLogged: loggedUser === null,
+  loggedUser,
 });
 
 export default connect(mapStateToProps)(App);

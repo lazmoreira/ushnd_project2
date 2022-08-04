@@ -1,5 +1,4 @@
 import { _saveQuestionAnswer, _saveQuestion } from "../api/_DATA";
-import { addAnswerUser, removeAnswerUser } from "./users";
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
 export const ANSWER_QUESTION = "ANSWER_QUESTION";
@@ -51,7 +50,6 @@ export function handleAddQuestion(optionOneText, optionTwoText, author) {
 export function handleAnswerQuestion(questionId, option, loggedUser) {
   return (dispatch) => {
     dispatch(answerQuestion(questionId, option, loggedUser));
-    dispatch(addAnswerUser(questionId, option, loggedUser));
 
     return _saveQuestionAnswer({
       authedUser: loggedUser,
@@ -60,7 +58,6 @@ export function handleAnswerQuestion(questionId, option, loggedUser) {
     }).catch((e) => {
       console.warn("Error in handleAnswerQuestion: ", e);
       dispatch(removeAnswer(questionId, option, loggedUser));
-      dispatch(removeAnswerUser(questionId, option, loggedUser));
       alert("There was an error answering the question. Please try again.");
     });
   };

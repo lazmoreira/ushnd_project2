@@ -1,8 +1,9 @@
+import { RECEIVE_USERS } from "../actions/users";
 import {
-  RECEIVE_USERS,
-  ADD_ANSWER_USER,
-  REMOVE_ANSWER_USER,
-} from "../actions/users";
+  ANSWER_QUESTION,
+  REMOVE_ANSWER,
+  ADD_QUESTION,
+} from "../actions/questions";
 
 export default function users(state = {}, action) {
   switch (action.type) {
@@ -12,7 +13,7 @@ export default function users(state = {}, action) {
         ...action.users,
       };
 
-    case ADD_ANSWER_USER:
+    case ANSWER_QUESTION:
       return {
         ...state,
         [action.loggedUser]: {
@@ -24,7 +25,7 @@ export default function users(state = {}, action) {
         },
       };
 
-    case REMOVE_ANSWER_USER:
+    case REMOVE_ANSWER:
       return {
         ...state,
         [action.loggedUser]: {
@@ -34,6 +35,16 @@ export default function users(state = {}, action) {
               (question) => question !== action.questionId
             ),
           },
+        },
+      };
+
+    case ADD_QUESTION:
+      const { question } = action;
+      return {
+        ...state,
+        [question.author]: {
+          ...state[question.author],
+          questions: state[question.author].questions.concat(question.id),
         },
       };
 

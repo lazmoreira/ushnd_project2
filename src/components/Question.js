@@ -1,8 +1,14 @@
 import { connect } from "react-redux";
 import { handleAnswerQuestion } from "../actions/questions";
+import { Navigate } from "react-router-dom";
 import withRouter from "../helpers/helper";
 
 const Question = (props) => {
+  console.log("001", props);
+  if (props.notExists) {
+    return <Navigate to="/notfound" />;
+  }
+
   const { question, author, user, dispatch } = props;
   const answered = question.id in user.answers;
   const votesOpt1 = question.optionOne.votes.length;
@@ -22,65 +28,67 @@ const Question = (props) => {
   };
 
   return (
-    <div className="container">
+    <div className="column col-6 col-mx-auto">
+      <h5
+        className="column col-12 text-primary"
+        style={{ textAlign: "center" }}
+      >{`Author: ${author.name}`}</h5>
+      <div className="column col-6 col-mx-auto">
+        <img
+          src={author.avatarURL}
+          alt={`Avatar of ${author.name}`}
+          className="column col-8 p-centered"
+        />
+      </div>
+      <h3
+        className="column col-12 text-primary"
+        style={{ textAlign: "center" }}
+      >
+        Would You Rather
+      </h3>
       <div className="columns">
-        <div className="p-centered">
-          <div>
-            <h5>Author: {author.name}</h5>
-            <img
-              src={author.avatarURL}
-              alt={`Avatar of ${author.name}`}
-              className="p-centered"
-            />
-            <h3>Would You Rather</h3>
-          </div>
-          <div className="columns">
-            <div className="column">
-              <button
-                className={
-                  answered === true && user.answers[question.id] === "optionOne"
-                    ? "btn btn-lg btn-primary"
-                    : "btn btn-lg"
-                }
-                id="optionOne"
-                onClick={handleOptionSelected}
-              >
-                {question.optionOne.text}
-              </button>
-              {answered === true &&
-              user.answers[question.id] === "optionOne" ? (
-                <div className="text-primary">Your vote</div>
-              ) : null}
-              {answered === true ? (
-                <div className="text-primary">
-                  {`${votesOpt1} votes - ${percentOpt1}%`}
-                </div>
-              ) : null}
+        <div className="column">
+          <button
+            className={
+              answered === true && user.answers[question.id] === "optionOne"
+                ? "btn btn-lg btn-block btn-primary"
+                : "btn btn-lg btn-block"
+            }
+            id="optionOne"
+            onClick={handleOptionSelected}
+          >
+            {question.optionOne.text}
+          </button>
+          {answered === true && user.answers[question.id] === "optionOne" ? (
+            <div className="text-primary">Your vote</div>
+          ) : null}
+          {answered === true ? (
+            <div className="text-primary">
+              {`${votesOpt1} votes - ${percentOpt1}%`}
             </div>
-            <div className="divider-vert" data-content="OR"></div>
-            <div className="column">
-              <button
-                className={
-                  answered === true && user.answers[question.id] === "optionTwo"
-                    ? "btn btn-lg btn-primary"
-                    : "btn btn-lg"
-                }
-                id="optionTwo"
-                onClick={handleOptionSelected}
-              >
-                {question.optionTwo.text}
-              </button>
-              {answered === true &&
-              user.answers[question.id] === "optionTwo" ? (
-                <div className="text-primary">Your vote</div>
-              ) : null}
-              {answered === true ? (
-                <p className="text-primary">
-                  {`${votesOpt2} votes - ${percentOpt2}%`}
-                </p>
-              ) : null}
-            </div>
-          </div>
+          ) : null}
+        </div>
+        <div className="divider-vert" data-content="OR"></div>
+        <div className="column">
+          <button
+            className={
+              answered === true && user.answers[question.id] === "optionTwo"
+                ? "btn btn-lg btn-block btn-primary"
+                : "btn btn-lg btn-block"
+            }
+            id="optionTwo"
+            onClick={handleOptionSelected}
+          >
+            {question.optionTwo.text}
+          </button>
+          {answered === true && user.answers[question.id] === "optionTwo" ? (
+            <div className="text-primary">Your vote</div>
+          ) : null}
+          {answered === true ? (
+            <p className="text-primary">
+              {`${votesOpt2} votes - ${percentOpt2}%`}
+            </p>
+          ) : null}
         </div>
       </div>
     </div>
@@ -88,9 +96,19 @@ const Question = (props) => {
 };
 
 const mapStateToProps = ({ loggedUser, questions, users }, props) => {
-  console.log("PROPS", props);
+  console.log("PROPS", loggedUser);
   const { question_id } = props.router.params;
   const question = questions[question_id];
+
+  console.log("PROPS", question_id);
+  console.log("PROPS", question);
+
+  if (!question) {
+    return {
+      notExists: true,
+    };
+  }
+
   const author = users[question.author];
   const user = users[loggedUser];
 
@@ -98,6 +116,7 @@ const mapStateToProps = ({ loggedUser, questions, users }, props) => {
     user,
     author,
     question,
+    notExists: false,
   };
 };
 

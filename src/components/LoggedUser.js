@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../actions/loggedUser";
 
 const LoggedUser = (props) => {
@@ -11,7 +11,7 @@ const LoggedUser = (props) => {
     e.preventDefault();
 
     props.dispatch(logoutUser());
-
+    localStorage.clear();
     navigate("/");
   };
 
@@ -19,12 +19,14 @@ const LoggedUser = (props) => {
     <div>
       {loggedUser !== null ? (
         <div>
-          <div className="text-primary">{loggedUser}</div>
-          <button className="btn" onClick={handleClick}>
+          <span className="text-primary mr-2">{loggedUser}</span>
+          <button className="btn btn-sm btn-primary" onClick={handleClick}>
             Logout
           </button>
         </div>
-      ) : null}
+      ) : (
+        <Link to="/">Login</Link>
+      )}
     </div>
   );
 };
